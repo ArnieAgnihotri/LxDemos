@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+LXDemos
 
-## Getting Started
+LXDemos is a web platform for creating, sharing, and discovering reproducible Linux configurations.
+It enables developers and teams to showcase environment setups, collaborate on configurations, and explore community-curated Linux demos.
 
-First, run the development server:
+📘 Overview
 
-```bash
+Configuring Linux environments repeatedly across systems or teams is inefficient and error-prone.
+LXDemos solves this by providing a central hub for reproducible configurations that can be shared, forked, and improved collaboratively.
+
+⚙️ Features
+
+🔐 Authentication — Secure login and registration using bcrypt and JWT
+
+📂 Configuration Library — Explore and share Linux configurations
+
+✍️ Upload Feature — Submit configuration files and metadata
+
+💬 Community Interaction (planned) — Likes, comments, and forks
+
+🤖 AI Assistant (planned) — Chatbot to guide setup and debugging
+
+👤 User Dashboard — Manage personal configurations and profile
+
+🧠 Tech Stack
+Layer	Technology
+Frontend	React (Vite), Tailwind CSS, Axios, React Router
+Backend	Node.js, Express, Mongoose
+Database	MongoDB
+Auth	bcrypt, JWT
+Other	ESLint, dotenv
+🧱 Architecture
+Frontend (React)
+   │
+   ├──> REST API (Axios)
+   │
+Backend (Express + Node.js)
+   ├── Auth routes (JWT)
+   ├── Config CRUD routes
+   │
+MongoDB (Mongoose)
+   ├── users
+   └── configurations
+
+📂 Project Structure
+LXDemos/
+├── client/              # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── utils/
+│   └── vite.config.js
+│
+├── server/              # Express backend
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   └── server.js
+│
+└── README.md
+
+🔗 API Endpoints
+Method	Endpoint	Description	Auth
+POST	/api/auth/register	Register new user	❌
+POST	/api/auth/login	Authenticate user	❌
+GET	/api/configs	Get all configurations	❌
+POST	/api/configs	Upload configuration	✅
+GET	/api/configs/:id	Fetch configuration by ID	❌
+DELETE	/api/configs/:id	Delete configuration	✅
+🔒 Authentication Flow
+
+User registers → password hashed using bcrypt
+
+User logs in → server issues JWT
+
+Client stores token and attaches it to Authorization header
+
+Protected routes verified via middleware
+
+⚡ Installation
+Prerequisites
+
+Node.js (v18+)
+
+MongoDB (local or Atlas)
+
+Git
+
+Steps
+# Clone repository
+git clone https://github.com/<your-username>/lxdemos.git
+cd lxdemos
+
+# Install backend
+cd server
+npm install
+
+# Install frontend
+cd ../client
+npm install
+
+Environment Variables
+
+Create server/.env:
+
+PORT=5000
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/lxdemos
+JWT_SECRET=your_secret_key
+
+Run
+# Start backend
+cd server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Start frontend
+cd ../client
+npm run dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Frontend → http://localhost:5173
+Backend → http://localhost:5000
 
-## Learn More
+🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Fork the repository
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a new branch (feature/<feature-name>)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Commit and push your changes
 
-## Deploy on Vercel
+Open a Pull Request
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Please follow existing structure and use consistent linting.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧭 Roadmap
+
+ Authentication (JWT + bcrypt)
+
+ Configuration library
+
+ Profile management
+
+ Community features (likes/comments)
+
+ AI assistant
+
+ Docker-based live previews
